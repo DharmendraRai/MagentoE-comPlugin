@@ -2,6 +2,7 @@
 
 $client = new GearmanClient();
 $client->addServer();
+print_r($client);
 
 // initialize the results of our 3 "query results" here
 $userInfo = $friends = $posts = null;
