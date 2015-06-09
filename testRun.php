@@ -12,6 +12,7 @@ foreach ($faballey as $value) {
         $count++;
     }
 }
+echo implode(',', $NotfoundArr);
 die;
 
 $sourceFilePath = 'http://d3l2031tfshpe7.cloudfront.net/images/Product/TOP01460A/2.jpg?v=2.0.0.1';
