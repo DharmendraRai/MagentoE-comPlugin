@@ -4,8 +4,6 @@
 
 //try{
 ini_set('display_errors', 1);
-
-
 $projectId = $_REQUEST['projectId'];
 $exQuery = "/home/ubuntu/PredictionIO/bin/pio app new $projectId";
 try {
