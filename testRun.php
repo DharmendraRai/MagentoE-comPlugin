@@ -13,16 +13,15 @@ $exQuery = "/home/ubuntu/PredictionIO/bin/pio app new $projectId";
 try {
     echo $exQuery;
     $output = shell_exec($exQuery);
-    $output1 = explode('\n', $output, 4);
+    $output1 = explode('[INFO] [App$]', $output);
     print_r($output1);
-    $output2 = $output1[3];
-    print_r($output2);
-
-    $output3 = str_replace('[INFO] [App$]', '', $output1[2]);
-    print_r($output3);
-    $output4 = explode('\n', $output3);
-    print_r($output4);
-
+    $result = array();
+    $output3 = str_replace('[INFO] [App$]', '', $output1[1]);
+    for ($index = 3; $index < count($output1); $index++) {
+        $temp = explode(':', $output1[$index]);
+        $result[$temp[0]] = $temp[1];
+    }
+    print_r($result);
 
 
     echo "<pre>$output</pre>";
@@ -31,9 +30,7 @@ try {
 }
 
 
-$projectId = $_REQUEST['projectId'];
-$exQuery = "pio app new $projectId";
-echo "<pre>$exQuery</pre>";
+
 $catArr = array();
 
 
