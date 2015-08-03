@@ -11,7 +11,7 @@ $exQuery = "/home/ubuntu/PredictionIO/bin/pio app new $projectId";
 try {
     $output = shell_exec($exQuery);
     $result = array();
-    if ($output == '[ERROR] [App$] App 109 already exists. Aborting.') {
+    if (strpos($output, 'already exists')) {
         $result['error'] = "App $projectId already exists";
     } else {
 
