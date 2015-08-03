@@ -11,16 +11,16 @@ try {
     $result = array();
     if (strpos($output, 'already exists')) {
         $result['error'] = "App $projectId already exists";
+        $result['projectId'] = $projectId;
     } else {
 
         $output1 = explode('[INFO] [App$]', $output);
-        print_r($output1);
-
         $output3 = str_replace('[INFO] [App$]', '', $output1[1]);
         for ($index = 3; $index < count($output1); $index++) {
             $temp = explode(':', $output1[$index]);
             $result[$temp[0]] = $temp[1];
         }
+        $result['projectId'] = $projectId;
     }
 
     print_r($result);
