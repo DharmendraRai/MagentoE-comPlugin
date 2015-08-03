@@ -5,26 +5,27 @@
 //try{
 ini_set('display_errors', 1);
 
-$output = shell_exec('ls -lart');
-echo "<pre>$output</pre>";
 
 $projectId = $_REQUEST['projectId'];
 $exQuery = "/home/ubuntu/PredictionIO/bin/pio app new $projectId";
 try {
-    echo $exQuery;
     $output = shell_exec($exQuery);
-    $output1 = explode('[INFO] [App$]', $output);
-    print_r($output1);
     $result = array();
-    $output3 = str_replace('[INFO] [App$]', '', $output1[1]);
-    for ($index = 3; $index < count($output1); $index++) {
-        $temp = explode(':', $output1[$index]);
-        $result[$temp[0]] = $temp[1];
+    if ($output == '[ERROR] [App$] App 109 already exists. Aborting.') {
+        $result['error'] = "App $projectId already exists";
+    } else {
+
+        $output1 = explode('[INFO] [App$]', $output);
+        print_r($output1);
+
+        $output3 = str_replace('[INFO] [App$]', '', $output1[1]);
+        for ($index = 3; $index < count($output1); $index++) {
+            $temp = explode(':', $output1[$index]);
+            $result[$temp[0]] = $temp[1];
+        }
     }
+
     print_r($result);
-
-
-    echo "<pre>$output</pre>";
 } catch (Exception $ex) {
     print_r($ex);
 }
@@ -34,9 +35,9 @@ try {
 $catArr = array();
 
 
-        $catArr['bfs'] = array('n' => 'BFS', "p" => 0);
-        $catArr['last_cat_name'] = array('n' => 'last_cat_name', "p" => 0);
-        echo json_encode($catArr);
+$catArr['bfs'] = array('n' => 'BFS', "p" => 0);
+$catArr['last_cat_name'] = array('n' => 'last_cat_name', "p" => 0);
+echo json_encode($catArr);
 $str = '{\x0A\x0A     \x22products\x22: [\x0A        {\x0A            \x22productTitle\x22: \x22MacBook\x22,\x0A            \x22sku\x22: \x22Product 16\x22,\x0A            \x22price\x22: \x22500.0000\x22,\x0A            \x22productId\x22: \x2243\x22,\x0A            \x22currency\x22: \x22USD\x22,\x0A            \x22category\x22: {\x0A                \x2218\x22: {\x0A                    \x22n\x22: \x22Laptops &amp; Notebooks\x22,\x0A                    \x22p\x22: 0\x0A                },\x0A                \x2220\x22: {\x0A                    \x22n\x22: \x22Desktops\x22,\x0A                    \x22p\x22: 0\x0A                }\x0A            },\x0A            \x22specialPrice\x22: 500,\x0A            \x22status\x22: \x22enabled\x22,\x0A            \x22productPictureUrl\x22: \x22catalog\x5C/demo\x5C/macbook_1.jpg\x22,\x0A            \x22pageUrl\x22: \x22http:\x5C/\x5C/lopencart.com\x5C/index.php?route=checkout\x5C/checkout?route=product\x5C/product&product_id=43\x22,\x0A            \x22qty\x22: \x222\x22,\x0A            \x22totalProductPrice\x22: \x221000.0000\x22,\x0A            \x22discountPrice\x22: false,\x0A            \x22stockAvailability\x22: \x22Out Of Stock\x22,\x0A            \x22size\x22: false,\x0A            \x22color\x22: false,\x0A            \x22orderId\x22: \x2231\x22,\x0A            \x22orderStatus\x22: \x221\x22\x0A        },\x0A        {\x0A            \x22productTitle\x22: \x22iPhone\x22,\x0A            \x22sku\x22: \x22product 11\x22,\x0A            \x22price\x22: \x22101.0000\x22,\x0A            \x22productId\x22: \x2240\x22,\x0A            \x22currency\x22: \x22USD\x22,\x0A            \x22category\x22: {\x0A                \x2220\x22: {\x0A                    \x22n\x22: \x22Desktops\x22,\x0A                    \x22p\x22: 0\x0A                },\x0A                \x2224\x22: {\x0A                    \x22n\x22: \x22Phones &amp; PDAs\x22,\x0A                    \x22p\x22: 0\x0A                }\x0A            },\x0A            \x22specialPrice\x22: 101,\x0A            \x22status\x22: \x22enabled\x22,\x0A            \x22productPictureUrl\x22: \x22catalog\x5C/demo\x5C/iphone_1.jpg\x22,\x0A            \x22pageUrl\x22: \x22http:\x5C/\x5C/lopencart.com\x5C/index.php?route=checkout\x5C/checkout?route=product\x5C/product&product_id=40\x22,\x0A            \x22qty\x22: \x221\x22,\x0A            \x22totalProductPrice\x22: \x22101.0000\x22,\x0A            \x22discountPrice\x22: false,\x0A            \x22stockAvailability\x22: \x22Out Of Stock\x22,\x0A            \x22size\x22: false,\x0A            \x22color\x22: false,\x0A            \x22orderId\x22: \x2231\x22,\x0A            \x22orderStatus\x22: \x221\x22\x0A        }\x0A    ],\x0A  \x0A    \x22orderInfo\x22: {\x0A        \x22orderId\x22: \x2231\x22,\x0A        \x22subtotalPrice\x22: 1101,\x0A        \x22totalShippingPrice\x22: 5,\x0A        \x22totalTaxes\x22: 0,\x0A        \x22totalDiscount\x22: -10,\x0A        \x22totalPrice\x22: 1096,\x0A        \x22promocode\x22: 1111,\x0A        \x22financialStatus\x22: false,\x0A        \x22paymentType\x22: \x22Cash On Delivery\x22,\x0A        \x22currency\x22: \x22USD\x22\x0A    },\x0A\x0A    \x22email\x22: \x22hjvhjcsa@gmail.com\x22,\x0A\x0A    \x22action\x22: \x22purchased\x22,\x0A\x0A    \x22apiKey\x22: \x22l03jhasj3o84nlshj4w4la52r4g0yl686sy45u6hha\x22\x0A\x0A}';
 //echo dec$str;
 $result = json_decode($str, JSON_UNESCAPED_UNICODE);
